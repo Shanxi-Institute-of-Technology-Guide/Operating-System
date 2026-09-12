@@ -4,12 +4,12 @@
 
 // 定义进程控制块 PCB 结构
 typedef struct pcb {
-    char name[10];      // 进程名
-    int priority;       // 优先权
-    int burst_time;     // 需要运行的时间（服务时间）
-    int remain_time;    // 剩余运行时间
-    char state;         // 状态：'R'就绪, 'F'完成
-    struct pcb *next;   // 指向下一个 PCB 的指针
+    char name[10];    // 进程名
+    int priority;     // 优先权
+    int burst_time;   // 需要运行的时间（服务时间）
+    int remain_time;  // 剩余运行时间
+    char state;       // 状态：'R'就绪, 'F'完成
+    struct pcb *next; // 指向下一个 PCB 的指针
 } PCB;
 
 PCB *ready_queue = NULL; // 就绪队列头指针

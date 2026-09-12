@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define P_NUM 5    // 进程数量
-#define R_NUM 3    // 资源种类数量
+#define P_NUM 5 // 进程数量
+#define R_NUM 3 // 资源种类数量
 
 // 全局变量定义
-int Available[R_NUM] = {3, 3, 2};             // 可利用资源向量
+int Available[R_NUM] = {3, 3, 2};                                                // 可利用资源向量
 int Max[P_NUM][R_NUM] = {{7, 5, 3}, {3, 2, 2}, {9, 0, 2}, {2, 2, 2}, {4, 3, 3}}; // 最大需求矩阵
-int Allocation[P_NUM][R_NUM] = {{0, 1, 0}, {2, 0, 0}, {3, 0, 2}, {2, 1, 1}, {0, 0, 2}}; // 已分配矩阵
-int Need[P_NUM][R_NUM];                       // 需求矩阵
+int Allocation[P_NUM][R_NUM] = {
+    {0, 1, 0}, {2, 0, 0}, {3, 0, 2}, {2, 1, 1}, {0, 0, 2}}; // 已分配矩阵
+int Need[P_NUM][R_NUM];                                     // 需求矩阵
 
 // 初始化Need矩阵
 void init() {
@@ -24,7 +25,8 @@ bool isSafe() {
     int SafeSequence[P_NUM];
     int count = 0;
 
-    for (int i = 0; i < R_NUM; i++) Work[i] = Available[i];
+    for (int i = 0; i < R_NUM; i++)
+        Work[i] = Available[i];
 
     while (count < P_NUM) {
         bool found = false;
@@ -32,22 +34,26 @@ bool isSafe() {
             if (!Finish[i]) {
                 int j;
                 for (j = 0; j < R_NUM; j++) {
-                    if (Need[i][j] > Work[j]) break;
+                    if (Need[i][j] > Work[j])
+                        break;
                 }
                 if (j == R_NUM) { // 如果该进程所有资源需求都能满足
-                    for (int k = 0; k < R_NUM; k++) Work[k] += Allocation[i][k];
+                    for (int k = 0; k < R_NUM; k++)
+                        Work[k] += Allocation[i][k];
                     Finish[i] = true;
                     SafeSequence[count++] = i;
                     found = true;
                 }
             }
         }
-        if (!found) break; // 找不到可以加入安全序列的进程
+        if (!found)
+            break; // 找不到可以加入安全序列的进程
     }
 
     if (count == P_NUM) {
         printf("系统当前处于安全状态。安全序列为: ");
-        for (int i = 0; i < P_NUM; i++) printf("P%d ", SafeSequence[i]);
+        for (int i = 0; i < P_NUM; i++)
+            printf("P%d ", SafeSequence[i]);
         printf("\n");
         return true;
     } else {
@@ -100,10 +106,11 @@ int main() {
     isSafe();
 
     int p_id, req[R_NUM];
-    printf("\n请输入请求资源的进程号(0-%d): ", P_NUM-1);
+    printf("\n请输入请求资源的进程号(0-%d): ", P_NUM - 1);
     scanf("%d", &p_id);
     printf("请输入请求各资源的数量(3种): ");
-    for (int i = 0; i < R_NUM; i++) scanf("%d", &req[i]);
+    for (int i = 0; i < R_NUM; i++)
+        scanf("%d", &req[i]);
 
     requestResources(p_id, req);
 

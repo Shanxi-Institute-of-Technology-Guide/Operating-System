@@ -9,8 +9,10 @@
 void print_status(int frames[], int m) {
     printf("[ ");
     for (int i = 0; i < m; i++) {
-        if (frames[i] == -1) printf(". ");
-        else printf("%d ", frames[i]);
+        if (frames[i] == -1)
+            printf(". ");
+        else
+            printf("%d ", frames[i]);
     }
     printf("]\t");
 }
@@ -18,7 +20,8 @@ void print_status(int frames[], int m) {
 // FIFO 算法
 void do_FIFO(int pages[], int n, int m) {
     int frames[m];
-    for (int i = 0; i < m; i++) frames[i] = -1; // 初始化
+    for (int i = 0; i < m; i++)
+        frames[i] = -1; // 初始化
 
     int fault = 0;
     int pointer = 0; // 指向最早进入的页面位置
